@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace DTO.MovieDTO
 {
-    public class GenreDTO1
+    public class GenreWithoutMovieGenreDTO
     {
         public int Id { get; set; }
-
         public string Name { get; set; } = null!;
-
-       
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DTO.MovieDTO;
-using DTO.UserDTO;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -12,19 +11,16 @@ namespace Domain.Mappings
 {
     public class GeneralProfile : Profile
     {
-      
         public GeneralProfile()
         {
-           CreateMap<Movie, MoviesDTO>().ReverseMap();
-           CreateMap<MovieGenre, MovieGenreDTO>().ReverseMap();
-           CreateMap<Genre, GenreDTO1>().ReverseMap();
-
-
-
+            CreateMap<Movie, MoviesDTO>().ReverseMap();
+            CreateMap<MovieGenre, MovieGenreDTO>().ReverseMap();
+            CreateMap<Genre, GenreWithoutMovieGenreDTO>().ReverseMap();
+            CreateMap<Genre, GenreDTO>().ReverseMap();
+            CreateMap<Serie, SerieDTO>().ReverseMap();
+            CreateMap<Serie, SerieWithoutEpisodesDTO>().ReverseMap();
+            CreateMap<Episode, EpisodeInSerieDTO>().ReverseMap();
+            CreateMap<Episode, EpisodeDTO>().ReverseMap();
         }
-
-        
-        
-
     }
 }

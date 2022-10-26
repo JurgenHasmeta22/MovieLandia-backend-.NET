@@ -18,9 +18,17 @@ namespace DAL.Concrete
         public IList<Movie> GetAllMovies()
         {
             return context.Include(x => x.MovieGenres)
-                          .ThenInclude(x => x.Genre)
-                          .ToList();
+                    .ThenInclude(x => x.Genre)
+                    .ToList();
         }
 
+        public Movie GetMovieById(int id)
+        {
+            return context.Include(x => x.MovieGenres)
+                .ThenInclude(x => x.Genre)
+                .ToList()
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+        }
     }
 }

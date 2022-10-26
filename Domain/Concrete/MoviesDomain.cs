@@ -3,7 +3,6 @@ using DAL.Contracts;
 using DAL.UoW;
 using Domain.Contracts;
 using DTO.MovieDTO;
-using DTO.UserDTO;
 using Entities.Models;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -29,5 +28,11 @@ namespace Domain.Concrete
             return moviesFinal;
         }
 
+        public MoviesDTO GetMovieById(int id)
+        {
+            Movie movie = moviesRepository.GetMovieById(id);
+            var movieFinal = _mapper.Map<MoviesDTO>(movie);
+            return movieFinal;
+        }
     }
 }

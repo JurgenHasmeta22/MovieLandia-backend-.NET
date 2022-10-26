@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Entities.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Entities.Models
+namespace DTO.MovieDTO
 {
-    public partial class Episode
+    public class EpisodeDTO
     {
         public int Id { get; set; }
         public string Title { get; set; } = null!;
@@ -11,6 +15,6 @@ namespace Entities.Models
         public string VideoSrc { get; set; } = null!;
         public string Description { get; set; } = null!;
         public int SerieId { get; set; }
-        public virtual Serie Serie { get; set; } = null!;
+        public virtual SerieWithoutEpisodesDTO Serie { get; set; } = null!;
     }
 }

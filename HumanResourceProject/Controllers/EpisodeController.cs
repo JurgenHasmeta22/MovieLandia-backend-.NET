@@ -1,24 +1,23 @@
 ﻿using Domain.Contracts;
-using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MovieLandia.Controllers
 {
-
     [ApiController]
     [Route("[controller]")]
-    public class MoviesController : ControllerBase
-    {
-        private readonly IMoviesDomain _moviesDomain;
 
-        public MoviesController(IMoviesDomain moviesDomain)
+    public class EpisodeController : ControllerBase
+    {
+        private readonly IEpisodeDomain _episodeDomain;
+        
+        public EpisodeController(IEpisodeDomain episodeDomain)
         {
-            _moviesDomain = moviesDomain;
+            _episodeDomain = episodeDomain;
         }
 
         [HttpGet]
-        [Route("getAllMovies")]
-        public IActionResult GetAllMovies()
+        [Route("getAllEpisodes")]
+        public IActionResult GetAllEpisodes()
         {
             try
             {
@@ -27,11 +26,11 @@ namespace MovieLandia.Controllers
                     return BadRequest();
                 }
 
-                var movies = _moviesDomain.GetAllMovies();
+                var episodes = _episodeDomain.GetAllEpisodes();
 
-                if (movies != null)
+                if (episodes != null)
                 {
-                    return Ok(movies);
+                    return Ok(episodes);
                 }
                 else
                 {
@@ -45,17 +44,17 @@ namespace MovieLandia.Controllers
         }
 
         [HttpGet]
-        [Route("getMovieById/{id}")]
-        public IActionResult GetMovieById([FromRoute] int id)
+        [Route("getEpisodeById/{id}")]
+        public IActionResult GetEpisodeById([FromRoute] int id)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest();
-                var movie = _moviesDomain.GetMovieById(id);
+                var episode = _episodeDomain.GetEpisodeById(id);
 
-                if (movie != null)
-                    return Ok(movie);
+                if (episode != null)
+                    return Ok(episode);
 
                 return NotFound();
             }

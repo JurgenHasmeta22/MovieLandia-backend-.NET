@@ -7,18 +7,18 @@ namespace MovieLandia.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class MoviesController : ControllerBase
+    public class SerieController : ControllerBase
     {
-        private readonly IMoviesDomain _moviesDomain;
+        private readonly ISerieDomain _serieDomain;
 
-        public MoviesController(IMoviesDomain moviesDomain)
+        public SerieController(ISerieDomain serieDomain)
         {
-            _moviesDomain = moviesDomain;
+            _serieDomain = serieDomain;
         }
 
         [HttpGet]
-        [Route("getAllMovies")]
-        public IActionResult GetAllMovies()
+        [Route("getAllSeries")]
+        public IActionResult GetAllSeries()
         {
             try
             {
@@ -27,11 +27,11 @@ namespace MovieLandia.Controllers
                     return BadRequest();
                 }
 
-                var movies = _moviesDomain.GetAllMovies();
+                var series = _serieDomain.GetAllSeries();
 
-                if (movies != null)
+                if (series != null)
                 {
-                    return Ok(movies);
+                    return Ok(series);
                 }
                 else
                 {
@@ -45,17 +45,17 @@ namespace MovieLandia.Controllers
         }
 
         [HttpGet]
-        [Route("getMovieById/{id}")]
-        public IActionResult GetMovieById([FromRoute] int id)
+        [Route("getSerieById/{id}")]
+        public IActionResult GetSerieById([FromRoute] int id)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest();
-                var movie = _moviesDomain.GetMovieById(id);
+                var serie = _serieDomain.GetSerieById(id);
 
-                if (movie != null)
-                    return Ok(movie);
+                if (serie != null)
+                    return Ok(serie);
 
                 return NotFound();
             }

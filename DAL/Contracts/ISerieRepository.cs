@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Contracts
 {
-    public interface IMoviesRepository : IRepository<Movie, int>
+    public interface ISerieRepository : IRepository<Serie, int>
     {
-        IList<Movie> GetAllMovies();
-        Movie GetMovieById(int id);
+        IList<Serie> GetAllSeries();
+        Serie GetSerieById(int id);
     }
 }

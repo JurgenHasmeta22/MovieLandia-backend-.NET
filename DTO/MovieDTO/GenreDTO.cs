@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace DTO.MovieDTO
 {
-    public class MovieGenreDTO
+    public class GenreDTO
     {
         public int Id { get; set; }
-        public int MovieId { get; set; }
-        public int GenreId { get; set; }
-        public virtual GenreWithoutMovieGenreDTO Genre { get; set; } = null!;
+        public string Name { get; set; } = null!;
+        public virtual ICollection<MovieGenreDTO> MovieGenres { get; set; }
     }
 }
