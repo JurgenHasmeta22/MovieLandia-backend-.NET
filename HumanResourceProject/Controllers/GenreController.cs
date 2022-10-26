@@ -4,21 +4,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MovieLandia.Controllers
 {
-
     [ApiController]
     [Route("[controller]")]
-    public class MovieController : ControllerBase
-    {
-        private readonly IMovieDomain _moviesDomain;
 
-        public MovieController(IMovieDomain moviesDomain)
+    public class GenreController : ControllerBase
+    {
+        private readonly IGenreDomain _genreDomain;
+        
+        public GenreController(IGenreDomain genreDomain)
         {
-            _moviesDomain = moviesDomain;
+            _genreDomain = genreDomain;
         }
 
         [HttpGet]
-        [Route("getAllMovies")]
-        public IActionResult GetAllMovies()
+        [Route("getAllGenres")]
+        public IActionResult GetAllGenres()
         {
             try
             {
@@ -27,11 +27,11 @@ namespace MovieLandia.Controllers
                     return BadRequest();
                 }
 
-                var movies = _moviesDomain.GetAllMovies();
+                var genres = _genreDomain.GetAllGenres();
 
-                if (movies != null)
+                if (genres != null)
                 {
-                    return Ok(movies);
+                    return Ok(genres);
                 }
                 else
                 {
@@ -45,17 +45,17 @@ namespace MovieLandia.Controllers
         }
 
         [HttpGet]
-        [Route("getMovieById/{id}")]
-        public IActionResult GetMovieById([FromRoute] int id)
+        [Route("getGenreById/{id}")]
+        public IActionResult GetGenreById([FromRoute] int id)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest();
-                var movie = _moviesDomain.GetMovieById(id);
+                var genre = _genreDomain.GetGenreById(id);
 
-                if (movie != null)
-                    return Ok(movie);
+                if (genre != null)
+                    return Ok(genre);
 
                 return NotFound();
             }

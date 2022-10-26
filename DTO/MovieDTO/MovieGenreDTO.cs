@@ -13,5 +13,6 @@ namespace DTO.MovieDTO
         public int MovieId { get; set; }
         public int GenreId { get; set; }
         public virtual GenreWithoutMovieGenreDTO Genre { get; set; } = null!;
+        public virtual MovieWithoutMovieGenreDTO Movie { get; set; } = null!;
     }
 }

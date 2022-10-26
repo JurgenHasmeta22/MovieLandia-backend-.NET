@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Domain.Contracts
 {
-    public interface IMoviesDomain
+    public interface IMovieDomain
     {
-        public IList<MoviesDTO> GetAllMovies();
-        public MoviesDTO GetMovieById(int id);
+        public IList<MovieDTO> GetAllMovies();
+        public MovieDTO GetMovieById(int id);
     }
 }
