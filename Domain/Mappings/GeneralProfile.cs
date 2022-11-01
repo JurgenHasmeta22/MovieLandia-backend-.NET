@@ -13,9 +13,11 @@ namespace Domain.Mappings
     {
         public GeneralProfile()
         {
-            CreateMap<Movie, MovieWithoutMovieGenreDTO>().ReverseMap();
             CreateMap<Movie, MovieDTO>().ReverseMap();
+            CreateMap<Movie, MovieWithoutMovieGenreDTO>().ReverseMap();
             CreateMap<MovieGenre, MovieGenreDTO>().ReverseMap();
+            CreateMap<MovieGenre, MovieGenreWithoutGenreDTO>().ReverseMap();
+            CreateMap<MovieGenre, MovieGenreWithoutMovieDTO>().ReverseMap();
             CreateMap<Genre, GenreWithoutMovieGenreDTO>().ReverseMap();
             CreateMap<Genre, GenreDTO>().ReverseMap();
             CreateMap<Serie, SerieDTO>().ReverseMap();

@@ -14,7 +14,7 @@ namespace DAL.DI
         public RepositoryRegistry()
         {
             IncludeRegistry<UnitOfWorkRegistry>();
-            For<IMoviesRepository>().Use<MoviesRepository>();
+            For<IMovieRepository>().Use<MovieRepository>();
             For<ISerieRepository>().Use<SerieRepository>();
             For<IEpisodeRepository>().Use<EpisodeRepository>();
         }

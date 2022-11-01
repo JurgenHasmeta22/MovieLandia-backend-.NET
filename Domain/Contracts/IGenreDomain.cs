@@ -10,5 +10,8 @@ namespace Domain.Contracts
     {
         public IList<GenreDTO> GetAllGenres();
         public GenreDTO GetGenreById(int id);
+        GenreDTO AddGenre(GenrePostDTO genre);
+        void UpdateGenreByIdPut(int id, GenrePostDTO genre);
+        void DeleteGenreById(int id);
     }
 }

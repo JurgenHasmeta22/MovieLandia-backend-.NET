@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
@@ -10,6 +11,8 @@ namespace Entities.Models
             Favorites = new HashSet<Favorite>();
             MovieGenres = new HashSet<MovieGenre>();
         }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Title { get; set; } = null!;
         public string VideoSrc { get; set; } = null!;

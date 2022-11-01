@@ -1,5 +1,6 @@
 ﻿using DAL.Contracts;
 using Entities.Models;
+using Helpers.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,17 +10,19 @@ using System.Threading.Tasks;
 
 namespace DAL.Concrete
 {
-    internal class MoviesRepository : BaseRepository<Movie, int>, IMoviesRepository
+    internal class MovieRepository : BaseRepository<Movie, int>, IMovieRepository
     {
-        public MoviesRepository(MovieLandiaContext dbContext) : base(dbContext)
-        {
+        public MovieRepository(MovieLandiaContext dbContext) : base(dbContext)
+            {
         }
 
-        public IList<Movie> GetAllMovies()
+        public PagedList<Movie> GetAllMovies(MovieParameters movieParameters)
         {
-            return context.Include(x => x.MovieGenres)
-                    .ThenInclude(x => x.Genre)
-                    .ToList();
+            return PagedList<Movie>.ToPagedList(
+                    context.Include(x => x.MovieGenres).ThenInclude(x => x.Genre),
+                    movieParameters.PageNumber,
+                    movieParameters.PageSize
+                );
         }
 
         public Movie GetMovieById(int id)

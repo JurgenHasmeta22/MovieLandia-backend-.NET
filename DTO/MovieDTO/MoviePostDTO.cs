@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace DTO.MovieDTO
 {
-    public class MovieDTO
+    public class MoviePostDTO
     {
-        public int Id { get; set; }
         public string Title { get; set; } = null!;
         public string VideoSrc { get; set; } = null!;
         public string PhotoSrc { get; set; } = null!;
@@ -19,6 +18,5 @@ namespace DTO.MovieDTO
         public int ReleaseYear { get; set; }
         public string Description { get; set; } = null!;
         public int Views { get; set; }  
-        public virtual ICollection<MovieGenreWithoutMovieDTO> MovieGenres { get; set; }
     }
 }

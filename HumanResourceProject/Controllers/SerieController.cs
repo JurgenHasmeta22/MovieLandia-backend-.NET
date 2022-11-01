@@ -1,8 +1,9 @@
 ﻿using Domain.Contracts;
+using DTO.MovieDTO;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MovieLandia.Controllers
+namespace SerieLandia.Controllers
 {
 
     [ApiController]
@@ -65,5 +66,70 @@ namespace MovieLandia.Controllers
                 throw ex;
             }
         }
+
+        [HttpPut]
+        [Route("UpdateSerieById/{id}")]
+        public IActionResult UpdateSerieByIdPut([FromRoute] int id, SeriePostDTO serie)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
+                _serieDomain.UpdateSerieByIdPut(id, serie);
+                return NoContent();
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
+        [HttpDelete]
+        [Route("DeleteSerieById/{id}")]
+        public IActionResult DeleteSerieById([FromRoute] int id)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest();
+
+                _serieDomain.DeleteSerieById(id);
+                return NoContent();
+            }
+
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [Route("AddSerie")]
+        public IActionResult AddSerie([FromBody] SeriePostDTO serie)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
+                if (serie is null)
+                    return BadRequest("SeriePostDTO object is null");
+
+                var createdSerie = _serieDomain.AddSerie(serie);
+                return Ok(createdSerie);
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Domain.Contracts;
-using Entities.Models;
+using DTO.MovieDTO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MovieLandia.Controllers
+namespace GenreLandia.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -65,5 +65,70 @@ namespace MovieLandia.Controllers
                 throw ex;
             }
         }
+
+        [HttpPut]
+        [Route("UpdateGenreById/{id}")]
+        public IActionResult UpdateGenreByIdPut([FromRoute] int id, GenrePostDTO genre)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
+                _genreDomain.UpdateGenreByIdPut(id, genre);
+                return NoContent();
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
+        [HttpDelete]
+        [Route("DeleteGenreById/{id}")]
+        public IActionResult DeleteGenreById([FromRoute] int id)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest();
+
+                _genreDomain.DeleteGenreById(id);
+                return NoContent();
+            }
+
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [Route("AddGenre")]
+        public IActionResult AddGenre([FromBody] GenrePostDTO genre)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
+                if (genre is null)
+                    return BadRequest("GenrePostDTO object is null");
+
+                var createdGenre = _genreDomain.AddGenre(genre);
+                return Ok(createdGenre);
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
     }
 }

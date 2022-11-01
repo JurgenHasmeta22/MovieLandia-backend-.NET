@@ -10,5 +10,8 @@ namespace Domain.Contracts
     {
         public IList<SerieDTO> GetAllSeries();
         public SerieDTO GetSerieById(int id);
+        SerieDTO AddSerie(SeriePostDTO serie);
+        void UpdateSerieByIdPut(int id, SeriePostDTO serie);
+        void DeleteSerieById(int id);
     }
 }

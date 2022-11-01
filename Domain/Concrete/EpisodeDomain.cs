@@ -26,11 +26,55 @@ namespace Domain.Concrete
             var episodesFinal = _mapper.Map<IList<EpisodeDTO>>(episodes);
             return episodesFinal;
         }
+
         public EpisodeDTO GetEpisodeById(int id)
         {
             Episode episode = episodeRepository.GetEpisodeById(id);
             var episodeFinal = _mapper.Map<EpisodeDTO>(episode);
             return episodeFinal;
+        }
+
+        public EpisodeDTO AddEpisode(EpisodePostDTO episode)
+        {
+            var episodeEntity = _mapper.Map<Episode>(episode);
+            var episodeFinal = episodeRepository.Add(episodeEntity);
+
+            var episodeToReturn = _mapper.Map<EpisodeDTO>(episodeFinal);
+            _unitOfWork.Save();
+
+            return episodeToReturn;
+        }
+
+        public void DeleteEpisodeById(int id)
+        {
+            try
+            {
+                var episode = episodeRepository.GetById(id);
+
+                if (episode is null)
+                    throw new Exception();
+
+                episodeRepository.Remove(id);
+                _unitOfWork.Save();
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void UpdateEpisodeByIdPut(int id, EpisodePostDTO episode)
+        {
+            var episodeEntity = episodeRepository.GetById(id);
+
+            if (episodeEntity is null)
+                throw new Exception();
+
+            episodeEntity = _mapper.Map<EpisodePostDTO, Episode>(episode, episodeEntity);
+
+            episodeRepository.Update(episodeEntity);
+            _unitOfWork.Save();
         }
 
     }

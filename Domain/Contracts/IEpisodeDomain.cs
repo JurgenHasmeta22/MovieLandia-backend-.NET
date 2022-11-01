@@ -10,5 +10,8 @@ namespace Domain.Contracts
     {
         public IList<EpisodeDTO> GetAllEpisodes();
         public EpisodeDTO GetEpisodeById(int id);
+        EpisodeDTO AddEpisode(EpisodePostDTO episode);
+        void UpdateEpisodeByIdPut(int id, EpisodePostDTO episode);
+        void DeleteEpisodeById(int id);
     }
 }

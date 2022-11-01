@@ -18,6 +18,7 @@ namespace Domain.DI
             IncludeRegistry<DomainUnitOfWorkRegistry>();
             For<IMovieDomain>().Use<MovieDomain>();
             For<ISerieDomain>().Use<SerieDomain>();
+            For<IGenreDomain>().Use<GenreDomain>();
             For<IEpisodeDomain>().Use<EpisodeDomain>();
             AddRepositoryRegistries();
             AddHttpContextRegistries();

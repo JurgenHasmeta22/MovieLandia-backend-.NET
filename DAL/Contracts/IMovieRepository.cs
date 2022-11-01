@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Helpers.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Contracts
 {
-    public interface IMoviesRepository : IRepository<Movie, int>
+    public interface IMovieRepository : IRepository<Movie, int>
     {
-        IList<Movie> GetAllMovies();
+        PagedList<Movie> GetAllMovies(MovieParameters movieParameters);
         Movie GetMovieById(int id);
     }
 }

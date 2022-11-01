@@ -1,7 +1,8 @@
 ﻿using Domain.Contracts;
+using DTO.MovieDTO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MovieLandia.Controllers
+namespace EpisodeLandia.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -64,5 +65,70 @@ namespace MovieLandia.Controllers
                 throw ex;
             }
         }
+
+        [HttpPut]
+        [Route("UpdateEpisodeById/{id}")]
+        public IActionResult UpdateEpisodeByIdPut([FromRoute] int id, EpisodePostDTO episode)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
+                _episodeDomain.UpdateEpisodeByIdPut(id, episode);
+                return NoContent();
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
+        [HttpDelete]
+        [Route("DeleteEpisodeById/{id}")]
+        public IActionResult DeleteEpisodeById([FromRoute] int id)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest();
+
+                _episodeDomain.DeleteEpisodeById(id);
+                return NoContent();
+            }
+
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [Route("AddEpisode")]
+        public IActionResult AddEpisode([FromBody] EpisodePostDTO episode)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
+                if (episode is null)
+                    return BadRequest("EpisodePostDTO object is null");
+
+                var createdEpisode = _episodeDomain.AddEpisode(episode);
+                return Ok(createdEpisode);
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
     }
 }
